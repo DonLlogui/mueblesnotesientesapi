@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
-const modelo = require('../modelo/LoginClienteModelo');
+const modelo = require('../../modelo/LoginClienteModelo');
 
 class LoginClienteControlador {
     static async validarCredencial(req, res) {
-        const { t1: email, t2: contra } = req.body;
+        const { tl1: email, tl2: contra } = req.body;
 
         if (!email || !contra) {
             return res.status(400).json({ error: 'Correo y contraseña son obligatorios' });

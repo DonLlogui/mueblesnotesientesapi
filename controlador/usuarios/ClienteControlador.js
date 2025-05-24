@@ -1,4 +1,4 @@
-const modelo = require('../modelo/ClienteModelo');
+const modelo = require('../../modelo/ClienteModelo');
 
 class ClienteControlador {
     // funcion crear nuevo cliente

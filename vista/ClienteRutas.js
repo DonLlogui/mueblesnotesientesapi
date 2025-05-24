@@ -1,6 +1,6 @@
 const express = require('express');
-const CRutas = require('../controlador/ClienteControlador');
-const LRutas = require('../controlador/LoginClienteControlador');
+const CRutas = require('../controlador/usuarios/ClienteControlador');
+const LRutas = require('../controlador/usuarios/LoginClienteControlador');
 const router = express.Router();
 
 router.post('/usuarios', CRutas.crearCliente);
