@@ -1,12 +1,12 @@
  const dbService = require('./bd/Conexion');
 const crypto = require('crypto');
 
-class LoginClienteModelo {
+class LoginAdminModelo {
   //busca por correo el usuario para el login
   static async buscarCorreo(email) {
     const query = 'SELECT idUsuario, nombres, correo, rol, contrasena, estado FROM usuarios WHERE correo = ? AND rol = ?';
     try {
-      const result = await dbService.query(query, [email, "Cliente"]);
+      const result = await dbService.query(query, [email, "Admin"]);
       return result.length ? result[0] : null;
     } catch (err) {
       throw new Error(`Error al buscar el usuario: ${err.message}`);
@@ -68,4 +68,4 @@ static async buscartoken(email) {
   
 }
 
-module.exports = LoginClienteModelo;
+module.exports = LoginAdminModelo;
