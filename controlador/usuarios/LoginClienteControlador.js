@@ -10,6 +10,10 @@ class LoginClienteControlador {
         }
 
         try {
+             const tok = await modelo.buscartoken(email);
+             if (tok) {
+              return res.status(401).json({ error: 'Ya existe una sesión activa con este token.' });
+            }
             const usuario = await modelo.buscarCorreo(email);
 
             if (!usuario) {
@@ -21,7 +25,9 @@ class LoginClienteControlador {
             }
 
             const coincide = await bcrypt.compare(contra, usuario.contrasena);
-
+            if (coincide) {
+                await modelo.resetearIntentosFallidos(email);
+            }
             if (!coincide) {
                 await modelo.incrementarIntentoFallido(email);
 
@@ -31,8 +37,7 @@ class LoginClienteControlador {
                     return res.status(403).json({ error: 'Cuenta bloqueada por múltiples intentos fallidos.' });
                 }
                  const intentos = await modelo.intentos(email);
-                return res.status(401).json({ error: 'Contraseña incorrecta',
-                    Intentos: intentos + ' De 3 posibles al sobrepasar será bloqueada la cuenta'
+                return res.status(401).json({ error: 'Credenciales incorectas, Intentos:  ' + intentos +' De 3 posibles al sobrepasar será bloqueada la cuenta'
                  });
             }
 

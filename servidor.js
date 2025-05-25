@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const rutacliente = require('./vista/ClienteRutas');
-//const rutaadmin = require('./vista/AdminRutas');
+const rutaadmin = require('./vista/AdminRutas');
 const app = express();
 const PORT = process.env.PORT || 3333;
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas 
 app.use('/', rutacliente);
-//app.use('/', rutaadmin);
+app.use('/seguridad', rutaadmin);
 
 // Iniciar el servidor
 app.listen(PORT, () => {

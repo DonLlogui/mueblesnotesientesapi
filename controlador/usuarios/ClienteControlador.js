@@ -41,8 +41,7 @@ class ClienteControlador {
             res.status(201).json({ mensaje: 'Usuario creado', id: result.insertId });
         } catch (err) {
             if (err.message.includes("Duplicate entry")) {
-                return res.status(409).json({ error: 'Ya existe un usuario con estos datos.',
-                    sugerencia: 'intenta recuperar la cuenta o inicia sesión.' });
+                return res.status(409).json({ error: 'Ya existe un usuario con estos datos, Sugerencia: intenta recuperar la cuenta o inicia sesión.' });
               } else {
                 return res.status(500).json({ error: 'Error inesperado: ' + err.message });
               }
